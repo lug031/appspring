@@ -1,0 +1,76 @@
+<div class="container p-3">
+
+    <div class="row">
+        <div class="col-md-8">
+            <table>
+                <tbody class="card" [formGroup]="tareaForm">
+                    <tr>
+                        <td>
+                            <input formControlName="nombre" class="form-control mb-1" placeholder="Nombre">
+                              
+
+                        </td>
+
+                        <td>
+                            <button (click)="addTarea()" class="btn btn-dark">
+                                Agregar
+                            </button>  
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-8">
+            <table class="table table-bordered table-dark">
+                <thead>
+                    
+                </thead>
+                <tbody>
+                    <tr *ngFor='let tarea of tareas; index as i;'>
+                        <td>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customCheck1" [checked]="tarea.estado" 
+                                [disabled]="!tarea.estadoEdit" [(ngModel)]="tarea.estado">
+                                <label class="custom-control-label" for="customCheck1" ></label>
+                            </div>
+                        </td>
+                        <td>
+                            <input [(ngModel)]="tarea.nombre" [disabled]="!tarea.estadoEdit" >
+                        </td>
+
+                        <td class="text-center">
+                            
+                            
+
+
+                            <button (click)="cambiarEstado(tarea)" class="btn btn-success" *ngIf="tarea.estadoEdit == false; else guardar">
+                                Editar
+                            </button>
+                            <button (click)="deleteTarea(tarea.id, 0)" class="btn btn-danger mx-1">
+                                Eliminar
+                            </button>
+                            <ng-template #guardar>
+                                <button (click)="editarTarea(tarea, i)" class="btn btn-success">
+                                    Guardar
+                                </button>
+                            </ng-template>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="confirm" *ngIf="confirm" >
+    <h4>Eliminar Item</h4>
+    <div class="d-flex align-items-center">
+        <button type="button" class="btn btn-link" (click)="closeConfirm()">Cancelar</button>
+        <button type="button" class="btn btn-link"  (click)="deleteTarea(dataTareaSelect, 1); closeConfirm()">Aceptar</button>
+    </div>
+</div>

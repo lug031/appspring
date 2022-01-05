@@ -1,0 +1,13 @@
+.confirm {
+    position: absolute;
+    background: rgb(32, 32, 32);
+    padding: 15px;
+    border: 2px solid;
+    border-radius: 7px;
+    width: 250px;
+    /* display: flex; */
+    /* align-items: center; */
+    color:#fff;
+    top: 82px;
+    right: 40%;
+}
